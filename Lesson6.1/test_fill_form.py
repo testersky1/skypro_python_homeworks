@@ -1,5 +1,4 @@
 import pytest
-from time import sleep
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
@@ -53,8 +52,7 @@ def test_fill_form():
 
         submit_button = driver.find_element(By.CSS_SELECTOR, 'button[type=submit]')
         submit_button.click()
-        
-        sleep(3)  
+          
         zip_code_field = driver.find_element(By.CSS_SELECTOR, '#zip-code')
         assert zip_code_field.value_of_css_property('background-color') == 'rgb(248, 215, 218)'
 
