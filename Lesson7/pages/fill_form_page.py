@@ -1,3 +1,5 @@
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 class FillFormPage:
 
@@ -27,6 +29,10 @@ class FillFormPage:
         self._driver.find_element(By.NAME, 'phone').click()
         self._driver.find_element(By.NAME, 'phone').send_keys(phone)
 
+    def zip_code(self, zip):
+        self._driver.find_element(By.NAME, 'zip-code').click()
+        self._driver.find_element(By.NAME, 'zip-code').send_keys(zip)
+
     def city_field(self, city):
         self._driver.find_element(By.NAME, 'city').click()
         self._driver.find_element(By.NAME, 'city').send_keys(city)
@@ -49,3 +55,12 @@ class FillFormPage:
     def empty_zip_field(self):
         zip = self._driver.find_element(By.ID, 'zip-code')
         return zip.value_of_css_property('background-color')
+    
+    def get_element_by_class(self, class_name):
+        element = WebDriverWait(self._driver, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, class_name))
+        )
+        return element
+    
+    def quit(self):
+        self._driver.quit()
